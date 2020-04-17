@@ -1,11 +1,11 @@
 class DockingStation
-  attr_reader :bike
+  attr_reader :bike_stored
 
   def release_bike
     Bike.new
   end
 
-  def dock(bike)
+  def dock(bike_stored)
     @bike_stored = bike
     return true
   end
