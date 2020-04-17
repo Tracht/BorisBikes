@@ -29,20 +29,20 @@ describe DockingStation do
 
   it "Checks that the bike is docked " do
     subject.dock(Bike.new)
-    expect(subject.bike_stored.count).to eq(1)
+    expect(subject.bikes.count).to eq(1)
   end
 
   it "Checks if bike exists in dock" do
     subject.dock(Bike.new)
-    expect(subject.bike_stored[0]).to be_a Bike
+    expect(subject.bikes[0]).to be_a Bike
   end
 
   it "Raises error if no bikes are stored" do
     expect{subject.release_bike}.to raise_error("No bikes available")
   end
 
-  it "Doesn't allow bike to dock if capacity = 1" do
-    subject.dock(Bike.new)
+  it "Doesn't allow bike to dock if capacity = 20" do
+    20.times { subject.dock(Bike.new) }
     expect{subject.dock(Bike.new)}.to raise_error("Dock is full")
   end
 end
