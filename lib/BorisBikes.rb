@@ -1,4 +1,5 @@
 class DockingStation
+  DEFAULT_CAPACITY = 20
   attr_reader :bikes
 
   def initialize
@@ -17,7 +18,7 @@ class DockingStation
 
   private
   def full?
-    fail "Dock is full" unless @bikes.count != 20
+    fail "Dock is full" unless @bikes.count != DEFAULT_CAPACITY
   end
   def empty?
     fail "No bikes available" unless @bikes.count != 0
