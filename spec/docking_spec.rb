@@ -1,6 +1,5 @@
 require "BorisBikes.rb"
 
-# in lib/BorisBikes.rb
 
 describe DockingStation do
   it "feature test release bike" do
@@ -42,7 +41,13 @@ describe DockingStation do
   end
 
   it "Doesn't allow bike to dock if capacity = 20" do
-    DockingStation::DEFAULT_CAPACITY.times { subject.dock(Bike.new) }
+    station = DockingStation.new(20)
+    station.capacity.times { subject.dock(Bike.new) }
     expect{subject.dock(Bike.new)}.to raise_error("Dock is full")
+  end
+
+  it "allow user to set dock capacity" do
+    station = DockingStation.new(30)
+    expect(station.capacity).to eq(30)
   end
 end
