@@ -14,10 +14,12 @@ describe DockingStation do
   # end
 
   it "Releases new bike" do
+    subject.dock(Bike.new)
     expect(subject.release_bike).to be_a Bike
   end
 
   it "Checks new bike works" do
+    subject.dock(Bike.new)
     expect(subject.release_bike.working?).to eq(true)
   end
 
@@ -26,11 +28,16 @@ describe DockingStation do
   end
 
   it "Checks that the bike is docked " do
-    expect(subject.dock(Bike.new)).to eq(true)
+    subject.dock(Bike.new)
+    expect(subject.bike_stored.count).to eq(1)
   end
 
   it "Checks if bike exists in dock" do
     subject.dock(Bike.new)
-    expect(subject.bike_stored).to be_a Bike
+    expect(subject.bike_stored[0]).to be_a Bike
+  end
+
+  it "Raises error if no bikes are stored" do
+    expect{subject.release_bike}.to raise_error("No bikes available")
   end
 end
